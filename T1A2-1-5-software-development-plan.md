@@ -6,9 +6,9 @@
 
 ## Features
 [100 words per feature]
-- The user can **start a new game or load a game in progress.** Game save data will be stored in an external file. 
-- user can make a guess and will receive feedback based on the cards in the cpu players' hands (or their final accusation that determines if they win or lose)
-- user can view a checklist of cards they have seen to help make their guesses
+- **Game Initialisation:** when starting a new game, the app will determine the winning combination of cards for the "envelope" and distribute the remaining cards to the players. user can save/load game data with an external text file
+- **Viewing Details:** user can view important information such as: cards in their hand, a checklist of seen cards, the other players in the game
+- **Making Guesses:** user can make a guess and will receive feedback based on the cards in the cpu players' hands (or their final accusation that determines if they win or lose)
 
 ## User Interaction
 
