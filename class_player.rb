@@ -1,4 +1,6 @@
 class Player
+  attr_accessor :cards
+
   @@character_list = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"]
   @@all_players = []
   @@cpu_players = []
@@ -15,6 +17,10 @@ class Player
 
     @cards = []
     @@all_players << self
+  end
+
+  def add_card(card)
+    @cards << card
   end
 
   def self.cpu_players
