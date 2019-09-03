@@ -1,11 +1,11 @@
 class Player
   @@cards = {
-    suspects: ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"],
-    rooms: ["Study", "Kitchen", "Ballroom", "Conservatory", "Billiard Room", "Library", "Hall", "Lounge", "Dining Room"],
-    weapons: ["Candlestick", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"]
+    suspect: ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"],
+    room: ["Study", "Kitchen", "Ballroom", "Conservatory", "Billiard Room", "Library", "Hall", "Lounge", "Dining Room"],
+    weapon: ["Candlestick", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"]
   }
 
-  @@character_list = Array.new(@@cards[:suspects])
+  @@character_list = Array.new(@@cards[:suspect])
   @@envelope_cards = {
     suspect: nil,
     room: nil,
@@ -23,4 +23,25 @@ class Player
       @@character_list.delete(@character)
     end
   end
+
+  def self.draw_card(deck)
+    card = deck.sample
+    deck.delete(card)
+    return card
+  end
+
+  def self.choose_envelope_cards
+    @@cards.each_pair do |deck, card_list|
+      card = draw_card(card_list)
+      @@envelope_cards[deck] = card
+    end
+  end
+
+  def self.envelope_cards
+    return @@envelope_cards
+  end
+
+  # def self.cards
+  #   return @@cards
+  # end
 end

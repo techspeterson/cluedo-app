@@ -2,7 +2,7 @@
 
 ## Game Initialisation (Save/Load)
 [ ] Allow user to choose number of total players (Thu)
-[ ] Choose a card from each category for the "envelope" (Tue)
+[x] Choose a card from each category for the "envelope" (Tue)
 [ ] Shuffle and distribute remaining cards to players (Tue)
 [ ] Allow user to save their current game to an external file, preserving player hands and other information (Thu)
 [ ] Allow user to load existing game save data from an external file to resume a saved game (Thu)
