@@ -1,6 +1,6 @@
 class Game
-  attr_accessor :decks
-  attr_accessor :envelope_cards
+  # attr_accessor :decks
+  # attr_accessor :envelope_cards
   attr_accessor :main_deck
 
   def initialize

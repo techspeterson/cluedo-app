@@ -23,6 +23,13 @@ class Player
     @cards << card
   end
 
+  def display_cards
+    puts "Your cards:"
+    @cards.each do |card|
+      puts card
+    end
+  end
+
   def self.cpu_players
     return @@cpu_players
   end
