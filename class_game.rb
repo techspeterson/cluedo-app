@@ -1,6 +1,4 @@
 class Game
-  # attr_accessor :decks
-  # attr_accessor :envelope_cards
   attr_accessor :main_deck
 
   @@suspect_list = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"]
@@ -39,6 +37,10 @@ class Game
       @main_deck.concat(card_list)
     end
     @main_deck.shuffle!
+  end
+
+  def envelope_cards
+    return @envelope_cards.values
   end
 
   def self.suspect_list
