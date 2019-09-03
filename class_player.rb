@@ -15,19 +15,31 @@ class Player
       @@cpu_players << self
     end
 
-    @cards = []
+    @cards_in_hand = []
     @@all_players << self
   end
 
   def add_card(card)
-    @cards << card
+    @cards_in_hand << card
   end
 
   def display_cards
     puts "Your cards:"
-    @cards.each do |card|
+    @cards_in_hand.each do |card|
       puts card
     end
+  end
+
+  def search_cards(search_terms)
+    found_cards = []
+    search_terms.each do |search_term|
+      @cards_in_hand.each do |card|
+        if card == search_term
+          found_cards << card
+        end
+      end
+    end
+    return found_cards
   end
 
   def self.cpu_players

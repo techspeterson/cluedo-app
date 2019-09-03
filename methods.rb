@@ -42,4 +42,11 @@ def make_guess
   suspect = enter_guess('suspect')
   room = enter_guess('room')
   weapon = enter_guess('weapon')
+
+  Player.cpu_players.each do |player|
+    found_cards = player.search_cards([suspect, room, weapon])
+    if !found_cards.empty?
+      puts "#{player} has: #{found_cards.sample}"
+    end
+  end
 end
