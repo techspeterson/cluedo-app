@@ -4,6 +4,8 @@ require_relative 'menu_methods'
 require 'tty-prompt'
 require 'json'
 
+FILE_PATH = 'save-data.json'
+
 def argv_init(argv)
   player_hash = {
     'scarlet' => Player.character_list[0],
@@ -60,10 +62,6 @@ def new_game(arg_hash, user_object)
     end
   end
 
-  user_object.cards_in_hand.each do |card|
-    user_object.update_checklist(card)
-  end
-
   return game
 end
 
@@ -78,7 +76,7 @@ def state_guess(guesses_array)
   return "It was #{guesses_array[0]} in the #{guesses_array[1]} with the #{guesses_array[2]}!"
 end
 
-def make_guess(user_object)
+def make_guess(game_object)
   guesses = guess_all_categories
   puts "\"#{state_guess(guesses)}\""
   puts ''
@@ -89,7 +87,7 @@ def make_guess(user_object)
     if !found_cards.empty?
       match_found = true
       card = found_cards.sample
-      user_object.update_checklist(card)
+      game_object.update_checklist(card)
       puts "#{player} has: #{card}"
     end
   end
@@ -126,15 +124,15 @@ end
 
 def save_game(game_object)
   game = {
-    envelope_cards: game_object.envelope_cards
+    envelope_cards: game_object.envelope_cards,
+    checklist: game_object.checklist
   }
   players = []
   Player.all_players.each do |player|
     players << {
       is_user: player.is_user,
       character: player.character,
-      cards_in_hand: player.cards_in_hand,
-      checklist_formatted: player.checklist_formatted
+      cards_in_hand: player.cards_in_hand
     }
   end
 
@@ -143,7 +141,6 @@ def save_game(game_object)
     players: players
   }
 
-  FILE_PATH = 'save-data.json'
   File.open(FILE_PATH, 'w') do |file|
     file.write(JSON.generate(data))
   end
@@ -151,4 +148,27 @@ def save_game(game_object)
   puts "Game saved to #{FILE_PATH}"
 end
 
-# def load_game
+def load_game(game_object, user_object)
+  # begin
+    json = JSON.parse(File.read(FILE_PATH))
+    game_object.envelope_cards = json['game']['envelope_cards']
+    game_object.checklist = json['game']['checklist']
+    game_object.format_table
+    cpu_players = []
+    json['players'].each do |player|
+      if player['is_user']
+        user_object.character = player['character']
+        user_object.cards_in_hand = player['cards_in_hand']
+      else
+        load_player = Player.new
+        load_player.character = player['character']
+        load_player.cards_in_hand = player['cards_in_hand']
+        cpu_players << load_player
+      end
+    end
+    Player.load_cpu_players(cpu_players)
+    puts "Successfully loaded game."
+  # rescue => e
+  #   puts 'Error: failed to load game.'
+  # end
+end
