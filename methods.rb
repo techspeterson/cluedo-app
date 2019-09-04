@@ -3,6 +3,26 @@ require_relative 'class_player'
 require_relative 'menu_methods'
 require 'tty-prompt'
 
+def argv_init(argv)
+  number_of_cpu_players = 5
+
+  if !argv.empty?
+    if argv.include?('-p')
+      index = argv.index('-p')
+      arg_players = argv[index + 1].to_i
+      if arg_players > 0 && arg_players <= 6
+        number_of_cpu_players = arg_players - 1
+      else
+        puts "Warning: Invalid player number. Default value used."
+      end
+    end
+  end
+
+  return {
+    number_of_cpu_players: number_of_cpu_players
+  }
+end
+
 def new_game(number_of_cpu_players, player_user)
   game = Game.new
 
@@ -71,4 +91,8 @@ def make_accusation(game_object)
     puts 'You lose...'
   end
   exit
+end
+
+def save_game(game_object)
+
 end

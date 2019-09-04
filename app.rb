@@ -3,9 +3,9 @@ require_relative 'class_player'
 require_relative 'methods'
 require_relative 'menu_methods'
 
-number_of_cpu_players = 5
+arg_hash = argv_init(ARGV)
 player_user = Player.new(true)
-game = new_game(number_of_cpu_players, player_user)
+game = new_game(arg_hash[:number_of_cpu_players], player_user)
 
 loop do
   player_user.display_cards
