@@ -5,7 +5,7 @@ require_relative 'menu_methods'
 
 number_of_cpu_players = 5
 player_user = Player.new(true)
-game = new_game(number_of_cpu_players)
+game = new_game(number_of_cpu_players, player_user)
 
 loop do
   player_user.display_cards
@@ -14,12 +14,11 @@ loop do
   menu = user_menu
   case menu
   when 1
-    make_guess
+    make_guess(player_user)
   when 2
     make_accusation(game)
   when 3
     puts player_user.display_checklist
-    # p player_user.checklist
   when 99
     exit
   end

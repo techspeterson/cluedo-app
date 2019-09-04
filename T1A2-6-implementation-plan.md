@@ -10,13 +10,13 @@
 ## Guessing
 [x] User can choose to make a guess consisting of character, room, weapon (Tue)
 [x] User will be informed if any of the other players have the relevant cards in their hands (Wed)
-[ ] Information will be saved in a checklist (Wed)
+[x] Information will be saved in a checklist (Wed)
 [x] User can choose to make their final accusation to determine if they win or lose the game (Wed)
 [ ] Upon game conclusion, allow user to start a new game (Thu)
 
 ## User Interface
 [x] User can view the cards in their hand (Tue)
-[ ] User can view a checklist of viewed cards (Wed)
+[x] User can view a checklist of viewed cards (Wed)
 [ ] User can view a list of other players in the game (Wed)
 [ ] Game interface will use ASCII art to represent cards (Thu)
-[ ] Game menu will allow easy selection of menu items, cards, etc (Wed)
+[x] Game menu will allow easy selection of menu items, cards, etc (Wed)
