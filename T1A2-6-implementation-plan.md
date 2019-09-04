@@ -11,7 +11,7 @@
 [x] User can choose to make a guess consisting of character, room, weapon (Tue)
 [x] User will be informed if any of the other players have the relevant cards in their hands (Wed)
 [ ] Information will be saved in a checklist (Wed)
-[ ] User can choose to make their final accusation to determine if they win or lose the game (Wed)
+[x] User can choose to make their final accusation to determine if they win or lose the game (Wed)
 [ ] Upon game conclusion, allow user to start a new game (Thu)
 
 ## User Interface

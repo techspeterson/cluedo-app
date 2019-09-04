@@ -1,5 +1,6 @@
 class Player
   attr_accessor :cards
+  attr_accessor :checklist
 
   @@character_list = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"]
   @@all_players = []
@@ -17,6 +18,7 @@ class Player
 
     @cards_in_hand = []
     @@all_players << self
+    @checklist = init_checklist
   end
 
   def add_card(card)
@@ -52,5 +54,22 @@ class Player
 
   def to_s
     return @character
+  end
+
+  def init_checklist
+    suspect_hash = {}
+    Game.suspect_list.each do |suspect|
+      suspect_hash[suspect] = false
+    end
+    room_hash = {}
+    Game.room_list.each do |room|
+      room_hash[room] = false
+    end
+    weapon_hash = {}
+    Game.weapon_list.each do |weapon|
+      weapon_hash[weapon] = false
+    end
+
+    return [suspect_hash, room_hash, weapon_hash]
   end
 end

@@ -1,5 +1,7 @@
 require_relative 'class_game'
 require_relative 'class_player'
+require_relative 'menu_methods'
+require 'tty-prompt'
 
 def new_game(number_of_cpu_players)
   game = Game.new
@@ -20,30 +22,33 @@ def new_game(number_of_cpu_players)
   return game
 end
 
-def enter_guess(category)
-  loop do
-    case category
-    when 'suspect'
-      puts 'It was... (enter suspect)'
-    when 'room'
-      puts '...in the... (enter room)'
-    when 'weapon'
-      puts '...with the...! (enter weapon)'
-    end
+# def enter_guess(category)
+#   loop do
+#     case category
+#     when 'suspect'
+#       puts 'It was... (enter suspect)'
+#     when 'room'
+#       puts '...in the... (enter room)'
+#     when 'weapon'
+#       puts '...with the...! (enter weapon)'
+#     end
 
-    guess = gets.strip
-    if Game.send("#{category}_list").include?(guess)
-      return guess
-    else
-      puts 'Error: Invalid entry.'
-    end
-  end
-end
+#     guess = gets.strip
+#     if Game.send("#{category}_list").include?(guess)
+#       return guess
+#     else
+#       puts 'Error: Invalid entry.'
+#     end
+#   end
+# end
 
 def guess_all_categories
-  suspect = enter_guess('suspect')
-  room = enter_guess('room')
-  weapon = enter_guess('weapon')
+  # suspect = enter_guess('suspect')
+  # room = enter_guess('room')
+  # weapon = enter_guess('weapon')
+  suspect = suspect_menu
+  room = room_menu
+  weapon = weapon_menu
   return [suspect, room, weapon]
 end
 
@@ -67,4 +72,5 @@ def make_accusation(game_object)
   else
     puts 'You lose...'
   end
+  exit
 end

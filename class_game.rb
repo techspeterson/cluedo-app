@@ -1,15 +1,17 @@
+require 'tty-prompt'
+
 class Game
   attr_accessor :main_deck
 
-  @@suspect_list = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"]
-  @@room_list = ["Study", "Kitchen", "Ballroom", "Conservatory", "Billiard Room", "Library", "Hall", "Lounge", "Dining Room"]
-  @@weapon_list = ["Candlestick", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"]
+  @@SUSPECT_LIST = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"]
+  @@ROOM_LIST = ["Study", "Kitchen", "Ballroom", "Conservatory", "Billiard Room", "Library", "Hall", "Lounge", "Dining Room"]
+  @@WEAPON_LIST = ["Candlestick", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"]
 
   def initialize
     @decks = {
-      suspect: Array.new(@@suspect_list),
-      room: Array.new(@@room_list),
-      weapon: Array.new(@@weapon_list)
+      suspect: Array.new(@@SUSPECT_LIST),
+      room: Array.new(@@ROOM_LIST),
+      weapon: Array.new(@@WEAPON_LIST)
     }
     @main_deck = []
     @envelope_cards = {
@@ -17,6 +19,7 @@ class Game
       room: nil,
       weapon: nil
     }
+    @@prompt = prompt = TTY::Prompt.new
   end
 
   def draw_card(deck=@main_deck)
@@ -44,14 +47,18 @@ class Game
   end
 
   def self.suspect_list
-    return @@suspect_list
+    return @@SUSPECT_LIST
   end
 
   def self.room_list
-    return @@room_list
+    return @@ROOM_LIST
   end
 
   def self.weapon_list
-    return @@weapon_list
+    return @@WEAPON_LIST
+  end
+
+  def self.prompt
+    return @@prompt
   end
 end
