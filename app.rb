@@ -4,21 +4,23 @@ require_relative 'methods'
 require_relative 'menu_methods'
 
 arg_hash = argv_init(ARGV)
-player_user = Player.new(true)
-game = new_game(arg_hash[:number_of_cpu_players], player_user)
+user_object = Player.new(true, arg_hash[:player_selection])
+game = new_game(arg_hash, user_object)
+
+show_player_info(user_object)
 
 loop do
-  player_user.display_cards
-
   menu = user_menu
   case menu
-  when 1
-    make_guess(player_user)
-  when 2
+  when 'guess'
+    make_guess(user_object)
+  when 'accuse'
     make_accusation(game)
-  when 3
-    puts player_user.display_checklist
-  when 99
+  when 'checklist'
+    puts user_object.display_checklist
+  when 'player'
+    show_player_info(user_object)
+  when 'exit'
     exit
   end
 end

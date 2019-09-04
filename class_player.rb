@@ -10,10 +10,10 @@ class Player
   @@all_players = []
   @@cpu_players = []
 
-  def initialize(is_user=false)
+  def initialize(is_user=false, player_selection=nil)
     if is_user
-      @character = @@character_list[0]
-      @@character_list.delete_at(0)
+      @character = player_selection
+      @@character_list.delete(player_selection)
     else
       @character = @@character_list.sample
       @@character_list.delete(@character)
@@ -29,13 +29,20 @@ class Player
     @cards_in_hand << card
   end
 
-  def display_cards
+  def display_self
     puts "You are playing as #{@character}."
+  end
+
+  def display_cards
     puts "Your cards:"
     @cards_in_hand.each do |card|
       puts card
     end
     puts ''
+  end
+
+  def self.display_players
+    puts "You are playing against #{@@cpu_players.join(', ')}"
   end
 
   def search_cards(search_terms)
@@ -56,6 +63,10 @@ class Player
 
   def self.all_players
     return @@all_players
+  end
+
+  def self.character_list
+    return @@character_list
   end
 
   def to_s

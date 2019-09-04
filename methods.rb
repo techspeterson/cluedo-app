@@ -4,7 +4,16 @@ require_relative 'menu_methods'
 require 'tty-prompt'
 
 def argv_init(argv)
+  player_hash = {
+    'scarlet' => Player.character_list[0],
+    'mustard' => Player.character_list[1],
+    'plum' => Player.character_list[2],
+    'green' => Player.character_list[3],
+    'peacock' => Player.character_list[4],
+    'white' => Player.character_list[5]
+  }
   number_of_cpu_players = 5
+  player_selection = player_hash['scarlet']
 
   if !argv.empty?
     if argv.include?('-p')
@@ -16,18 +25,29 @@ def argv_init(argv)
         puts "Warning: Invalid player number. Default value used."
       end
     end
+
+    if argv.include?('-c')
+      index = argv.index('-c')
+      arg_character = argv[index + 1]
+      if player_hash.include?(arg_character)
+        player_selection = player_hash[arg_character]
+      else
+        puts 'Warning: Invalid character selection. Default character used.'
+      end
+    end
   end
 
   return {
-    number_of_cpu_players: number_of_cpu_players
+    number_of_cpu_players: number_of_cpu_players,
+    player_selection: player_selection
   }
 end
 
-def new_game(number_of_cpu_players, player_user)
+def new_game(arg_hash, user_object)
   game = Game.new
 
   game.choose_envelope_cards
-  number_of_cpu_players.times do
+  arg_hash[:number_of_cpu_players].times do
     Player.new
   end
 
@@ -39,8 +59,8 @@ def new_game(number_of_cpu_players, player_user)
     end
   end
 
-  player_user.cards_in_hand.each do |card|
-    player_user.update_checklist(card)
+  user_object.cards_in_hand.each do |card|
+    user_object.update_checklist(card)
   end
 
   return game
@@ -57,9 +77,10 @@ def state_guess(guesses_array)
   return "It was #{guesses_array[0]} in the #{guesses_array[1]} with the #{guesses_array[2]}!"
 end
 
-def make_guess(player_user)
+def make_guess(user_object)
   guesses = guess_all_categories
-  puts "\"#{state_guess(guesses)}\"\n"
+  puts "\"#{state_guess(guesses)}\""
+  puts ''
 
   match_found = false
   Player.cpu_players.each do |player|
@@ -67,7 +88,7 @@ def make_guess(player_user)
     if !found_cards.empty?
       match_found = true
       card = found_cards.sample
-      player_user.update_checklist(card)
+      user_object.update_checklist(card)
       puts "#{player} has: #{card}"
     end
   end
@@ -75,13 +96,16 @@ def make_guess(player_user)
   if !match_found
     puts 'No players have cards to show you.'
   end
+
+  puts ''
 end
 
 def make_accusation(game_object)
   guesses = guess_all_categories
   envelope_cards = game_object.envelope_cards
 
-  puts "\"#{state_guess(guesses)}\"\n"
+  puts "\"#{state_guess(guesses)}\""
+  puts ""
   puts 'The correct answer is...'
   puts state_guess(envelope_cards)
 
@@ -91,6 +115,12 @@ def make_accusation(game_object)
     puts 'You lose...'
   end
   exit
+end
+
+def show_player_info(user_object)
+  user_object.display_self
+  Player.display_players
+  user_object.display_cards
 end
 
 def save_game(game_object)

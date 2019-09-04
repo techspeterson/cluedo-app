@@ -1,9 +1,10 @@
 def user_menu
   choices = [
-    { name: 'Make a guess', value: 1 },
-    { name: 'Make your accusation', value: 2 },
-    { name: 'Show checklist', value: 3 },
-    { name: 'Exit', value: 99 }
+    { name: 'Make a guess', value: 'guess' },
+    { name: 'Show checklist', value: 'checklist' },
+    { name: 'Show player info', value: 'player' },
+    { name: 'Make your accusation', value: 'accuse' },
+    { name: 'Exit', value: 'exit' }
   ]
   return Game.prompt.select('What would you like to do?', choices)
 end

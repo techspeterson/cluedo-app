@@ -1,7 +1,7 @@
 # Feature Implementation Plan
 
 ## Game Initialisation (Save/Load)
-[ ] Allow user to choose number of total players (Thu)
+[x] Allow user to choose number of total players (Thu)
 [x] Choose a card from each category for the "envelope" (Tue)
 [x] Shuffle and distribute remaining cards to players (Tue)
 [ ] Allow user to save their current game to an external file, preserving player hands and other information (Thu)
@@ -17,6 +17,6 @@
 ## User Interface
 [x] User can view the cards in their hand (Tue)
 [x] User can view a checklist of viewed cards (Wed)
-[ ] User can view a list of other players in the game (Wed)
+[x] User can view a list of other players in the game (Wed)
 [ ] Game interface will use ASCII art to represent cards (Thu)
 [x] Game menu will allow easy selection of menu items, cards, etc (Wed)
