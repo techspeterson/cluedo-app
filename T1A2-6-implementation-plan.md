@@ -5,7 +5,7 @@
 [x] Choose a card from each category for the "envelope" (Tue)
 [x] Shuffle and distribute remaining cards to players (Tue)
 [x] Allow user to save their current game to an external file, preserving player hands and other information (Thu)
-[ ] Allow user to load existing game save data from an external file to resume a saved game (Thu)
+[x] Allow user to load existing game save data from an external file to resume a saved game (Thu)
 
 ## Guessing
 [x] User can choose to make a guess consisting of character, room, weapon (Tue)

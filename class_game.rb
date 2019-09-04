@@ -28,7 +28,7 @@ class Game
       room: nil,
       weapon: nil
     }
-    @checklist_formatted = init_checklist
+    init_checklist
     @@prompt = prompt = TTY::Prompt.new
   end
 
@@ -95,7 +95,7 @@ class Game
       @table_rows << [suspect, room, weapon]
     end
 
-    return TTY::Table.new header: ['Suspects', 'Rooms', 'Weapons'], rows: @table_rows
+    @checklist_table =  TTY::Table.new header: ['Suspects', 'Rooms', 'Weapons'], rows: @table_rows
   end
 
   def init_checklist
@@ -111,15 +111,15 @@ class Game
     end
     @checklist = checklist_hash
 
-    return format_table
+    format_table
   end
 
   def display_checklist
-    @checklist_formatted.render(:ascii)
+    @checklist_table.render(:ascii)
   end
 
   def update_checklist(card)
     @checklist[card] = true
-    @checklist_formatted = format_table
+    format_table
   end
 end
