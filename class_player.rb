@@ -1,11 +1,12 @@
 require 'tty-table'
+require 'colorize'
 
 class Player
   attr_reader :cards_in_hand
   attr_accessor :checklist
   attr_reader :table_rows
 
-  @@character_list = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"]
+  @@character_list = ["Miss Scarlet".colorize(:red), "Colonel Mustard".colorize(:yellow), "Professor Plum".colorize(:magenta), "Rev. Green".colorize(:green), "Mrs. Peacock".colorize(:blue), "Mrs. White".colorize(:light_white)]
   @@all_players = []
   @@cpu_players = []
 
@@ -29,10 +30,12 @@ class Player
   end
 
   def display_cards
+    puts "You are playing as #{@character}."
     puts "Your cards:"
     @cards_in_hand.each do |card|
       puts card
     end
+    puts ''
   end
 
   def search_cards(search_terms)

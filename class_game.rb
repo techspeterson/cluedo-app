@@ -1,11 +1,18 @@
 require 'tty-prompt'
+require 'colorize'
 
 class Game
   attr_accessor :main_deck
 
-  @@SUSPECT_LIST = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"]
-  @@ROOM_LIST = ["Study", "Kitchen", "Ballroom", "Conservatory", "Billiard Room", "Library", "Hall", "Lounge", "Dining Room"]
-  @@WEAPON_LIST = ["Candlestick", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"]
+  @@SUSPECT_LIST = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"].map do |suspect|
+    suspect.colorize(:light_yellow)
+  end
+  @@ROOM_LIST = ["Study", "Kitchen", "Ballroom", "Conservatory", "Billiard Room", "Library", "Hall", "Lounge", "Dining Room"].map do |room|
+    room.colorize(:light_blue)
+  end
+  @@WEAPON_LIST = ["Candlestick", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"].map do |weapon|
+    weapon.colorize(:light_red)
+  end
 
   def initialize
     @decks = {

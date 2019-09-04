@@ -9,7 +9,6 @@ game = new_game(number_of_cpu_players, player_user)
 
 loop do
   player_user.display_cards
-  # p game.envelope_cards
 
   menu = user_menu
   case menu
