@@ -5,6 +5,9 @@ class Player
   attr_reader :cards_in_hand
   attr_accessor :checklist
   attr_reader :table_rows
+  attr_accessor :character
+  attr_accessor :checklist_formatted
+  attr_accessor :is_user
 
   @@character_list = ["Miss Scarlet".colorize(:red), "Colonel Mustard".colorize(:yellow), "Professor Plum".colorize(:magenta), "Rev. Green".colorize(:green), "Mrs. Peacock".colorize(:blue), "Mrs. White".colorize(:light_white)]
   @@all_players = []
@@ -14,15 +17,18 @@ class Player
     if is_user
       @character = player_selection
       @@character_list.delete(player_selection)
+      @is_user = true
+      @checklist_formatted = init_checklist
     else
       @character = @@character_list.sample
       @@character_list.delete(@character)
+      @is_user = false
+      @checklist_formatted = []
       @@cpu_players << self
     end
 
     @cards_in_hand = []
     @@all_players << self
-    @checklist_formatted = init_checklist
   end
 
   def add_card(card)

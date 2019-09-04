@@ -4,6 +4,7 @@ def user_menu
     { name: 'Show checklist', value: 'checklist' },
     { name: 'Show player info', value: 'player' },
     { name: 'Make your accusation', value: 'accuse' },
+    { name: 'Save game', value: 'save' },
     { name: 'Exit', value: 'exit' }
   ]
   return Game.prompt.select('What would you like to do?', choices)

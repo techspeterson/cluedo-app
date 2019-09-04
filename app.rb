@@ -20,6 +20,8 @@ loop do
     puts user_object.display_checklist
   when 'player'
     show_player_info(user_object)
+  when 'save'
+    save_game(game)
   when 'exit'
     exit
   end

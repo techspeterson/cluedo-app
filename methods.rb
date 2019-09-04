@@ -2,6 +2,7 @@ require_relative 'class_game'
 require_relative 'class_player'
 require_relative 'menu_methods'
 require 'tty-prompt'
+require 'json'
 
 def argv_init(argv)
   player_hash = {
@@ -102,7 +103,7 @@ end
 
 def make_accusation(game_object)
   guesses = guess_all_categories
-  envelope_cards = game_object.envelope_cards
+  envelope_cards = game_object.envelope_cards_values
 
   puts "\"#{state_guess(guesses)}\""
   puts ""
@@ -124,5 +125,30 @@ def show_player_info(user_object)
 end
 
 def save_game(game_object)
+  game = {
+    envelope_cards: game_object.envelope_cards
+  }
+  players = []
+  Player.all_players.each do |player|
+    players << {
+      is_user: player.is_user,
+      character: player.character,
+      cards_in_hand: player.cards_in_hand,
+      checklist_formatted: player.checklist_formatted
+    }
+  end
 
+  data = {
+    game: game,
+    players: players
+  }
+
+  FILE_PATH = 'save-data.json'
+  File.open(FILE_PATH, 'w') do |file|
+    file.write(JSON.generate(data))
+  end
+
+  puts "Game saved to #{FILE_PATH}"
 end
+
+# def load_game

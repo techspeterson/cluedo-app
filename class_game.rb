@@ -3,6 +3,7 @@ require 'colorize'
 
 class Game
   attr_accessor :main_deck
+  attr_accessor :envelope_cards
 
   @@SUSPECT_LIST = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"].map do |suspect|
     suspect.colorize(:light_yellow)
@@ -49,7 +50,7 @@ class Game
     @main_deck.shuffle!
   end
 
-  def envelope_cards
+  def envelope_cards_values
     return @envelope_cards.values
   end
 
