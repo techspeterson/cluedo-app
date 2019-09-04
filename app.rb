@@ -18,7 +18,8 @@ loop do
   when 2
     make_accusation(game)
   when 3
-    p player_user.checklist
+    puts player_user.display_checklist
+    # p player_user.checklist
   when 99
     exit
   end

@@ -1,3 +1,5 @@
+require 'tty-table'
+
 class Player
   attr_accessor :cards
   attr_accessor :checklist
@@ -18,7 +20,7 @@ class Player
 
     @cards_in_hand = []
     @@all_players << self
-    @checklist = init_checklist
+    @checklist_formatted = init_checklist
   end
 
   def add_card(card)
@@ -57,19 +59,47 @@ class Player
   end
 
   def init_checklist
-    suspect_hash = {}
+    checklist_hash = {}
     Game.suspect_list.each do |suspect|
-      suspect_hash[suspect] = false
+      checklist_hash[suspect] = false
     end
-    room_hash = {}
     Game.room_list.each do |room|
-      room_hash[room] = false
+      checklist_hash[room] = false
     end
-    weapon_hash = {}
     Game.weapon_list.each do |weapon|
-      weapon_hash[weapon] = false
+      checklist_hash[weapon] = false
     end
+    @checklist = checklist_hash
 
-    return [suspect_hash, room_hash, weapon_hash]
+    @table_rows = []
+    9.times do |index|
+      suspect = room = weapon = ''
+      if index < Game.suspect_list.length
+        suspect_name = Game.suspect_list[index]
+        suspect = suspect_name + checkbox(suspect_name)
+      end
+      if index < Game.room_list.length
+        room_name = Game.room_list[index]
+        room = room_name + checkbox(room_name)
+      end
+      if index < Game.weapon_list.length
+        weapon_name = Game.weapon_list[index]
+        weapon = weapon_name + checkbox(weapon_name)
+      end
+      @table_rows << [suspect, room, weapon]
+    end
+    return TTY::Table.new header: ['Suspects', 'Rooms', 'Weapons'], rows: @table_rows
+  end
+
+  def checkbox(card)
+    return @checklist[card] ? ' [x]' : ' [ ]'
+  end
+
+  def display_checklist
+    @checklist_formatted.render(:ascii)
+  end
+
+  def update_checklist
+    
   end
 end
