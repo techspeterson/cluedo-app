@@ -1,4 +1,17 @@
-def user_menu
+require 'artii'
+
+def main_menu
+  a = Artii::Base.new :font => 'slant'
+  # puts a.asciify('Cluedo')
+  choices = [
+    { name: 'New game', value: 'new' },
+    { name: 'Load game', value: 'load' },
+    { name: 'Exit', value: 'exit' }
+  ]
+  return Game.prompt.select(a.asciify('Cluedo'), choices)
+end
+
+def game_menu
   choices = [
     { name: 'Make a guess', value: 'guess' },
     { name: 'Show checklist', value: 'checklist' },

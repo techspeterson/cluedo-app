@@ -50,6 +50,12 @@ class Player
     puts "You are playing against #{@@cpu_players.join(', ')}"
   end
 
+  def show_player_info
+    display_self
+    Player.display_players
+    display_cards
+  end
+
   def search_cards(search_terms)
     found_cards = []
     search_terms.each do |search_term|

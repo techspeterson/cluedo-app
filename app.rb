@@ -10,23 +10,36 @@ user_object.cards_in_hand.each do |card|
   game_object.update_checklist(card)
 end
 
-load_game(game_object, user_object)
-show_player_info(user_object)
-
-loop do
-  menu = user_menu
-  case menu
-  when 'guess'
-    make_guess(game_object)
-  when 'accuse'
-    make_accusation(game_object)
-  when 'checklist'
-    puts game_object.display_checklist
-  when 'player'
-    show_player_info(user_object)
-  when 'save'
-    save_game(game_object)
-  when 'exit'
-    exit
+def game_loop(game_object, user_object)
+  loop do
+    menu = game_menu
+    case menu
+    when 'guess'
+      make_guess(game_object)
+    when 'accuse'
+      make_accusation(game_object)
+    when 'checklist'
+      puts game_object.display_checklist
+    when 'player'
+      show_player_info(user_object)
+    when 'save'
+      save_game(game_object)
+    when 'exit'
+      exit
+    end
   end
 end
+
+menu = main_menu
+case menu
+when 'new'
+  user_object.show_player_info
+  game_loop(game_object, user_object)
+when 'load'
+  load_game(game_object, user_object)
+  game_loop(game_object, user_object)
+when 'exit'
+  exit
+end
+
+show_player_info(user_object)

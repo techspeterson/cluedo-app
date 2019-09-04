@@ -116,12 +116,6 @@ def make_accusation(game_object)
   exit
 end
 
-def show_player_info(user_object)
-  user_object.display_self
-  Player.display_players
-  user_object.display_cards
-end
-
 def save_game(game_object)
   game = {
     envelope_cards: game_object.envelope_cards,
@@ -149,7 +143,7 @@ def save_game(game_object)
 end
 
 def load_game(game_object, user_object)
-  # begin
+  begin
     json = JSON.parse(File.read(FILE_PATH))
     game_object.envelope_cards = json['game']['envelope_cards']
     game_object.checklist = json['game']['checklist']
@@ -168,7 +162,7 @@ def load_game(game_object, user_object)
     end
     Player.load_cpu_players(cpu_players)
     puts "Successfully loaded game."
-  # rescue => e
-  #   puts 'Error: failed to load game.'
-  # end
+  rescue => e
+    puts "Error: failed to load game. Make sure #{FILE_PATH} is in the game directory"
+  end
 end
