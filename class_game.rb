@@ -5,6 +5,7 @@ class Game
   attr_accessor :main_deck
   attr_accessor :envelope_cards
   attr_accessor :checklist
+  attr_reader :user
 
   @@SUSPECT_LIST = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"].map do |suspect|
     suspect.colorize(:light_yellow)
@@ -16,7 +17,7 @@ class Game
     weapon.colorize(:light_red)
   end
 
-  def initialize
+  def initialize(user_object)
     @decks = {
       suspect: Array.new(@@SUSPECT_LIST),
       room: Array.new(@@ROOM_LIST),
@@ -30,6 +31,7 @@ class Game
     }
     init_checklist
     @@prompt = prompt = TTY::Prompt.new
+    @user = user_object
   end
 
   def draw_card(deck=@main_deck)

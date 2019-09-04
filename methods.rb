@@ -6,7 +6,7 @@ require 'json'
 
 FILE_PATH = 'save-data.json'
 
-def argv_init(argv)
+def process_argv(argv)
   player_hash = {
     'scarlet' => Player.character_list[0],
     'mustard' => Player.character_list[1],
@@ -47,7 +47,7 @@ def argv_init(argv)
 end
 
 def new_game(arg_hash, user_object)
-  game = Game.new
+  game = Game.new(user_object)
 
   game.choose_envelope_cards
   arg_hash[:number_of_cpu_players].times do
@@ -63,6 +63,15 @@ def new_game(arg_hash, user_object)
   end
 
   return game
+end
+
+def init_from_args(arg_hash)
+  user_object = Player.new(true, arg_hash[:player_selection])
+  game_object = new_game(arg_hash, user_object)
+  game_object.user.cards_in_hand.each do |card|
+    game_object.update_checklist(card)
+  end
+  return game_object
 end
 
 def guess_all_categories
@@ -142,7 +151,7 @@ def save_game(game_object)
   puts "Game saved to #{FILE_PATH}"
 end
 
-def load_game(game_object, user_object)
+def load_game(game_object)
   begin
     json = JSON.parse(File.read(FILE_PATH))
     game_object.envelope_cards = json['game']['envelope_cards']
@@ -151,8 +160,8 @@ def load_game(game_object, user_object)
     cpu_players = []
     json['players'].each do |player|
       if player['is_user']
-        user_object.character = player['character']
-        user_object.cards_in_hand = player['cards_in_hand']
+        game_object.user.character = player['character']
+        game_object.user.cards_in_hand = player['cards_in_hand']
       else
         load_player = Player.new
         load_player.character = player['character']
