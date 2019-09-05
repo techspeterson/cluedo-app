@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'artii'
 require 'tty-prompt'
 require_relative 'class_game'
@@ -9,13 +11,13 @@ require_relative 'init_methods'
 PROMPT = TTY::Prompt.new
 
 def main_menu
-  a = Artii::Base.new :font => 'slant'
+  a = Artii::Base.new font: 'slant'
   choices = [
     { name: 'New game', value: 'new' },
     { name: 'Load game', value: 'load' },
     { name: 'Exit', value: 'exit' }
   ]
-  return PROMPT.select(a.asciify('Cluedo'), choices)
+  PROMPT.select(a.asciify('Cluedo'), choices)
 end
 
 def game_menu
@@ -27,22 +29,22 @@ def game_menu
     { name: 'Save game', value: 'save' },
     { name: 'Exit', value: 'exit' }
   ]
-  return PROMPT.select('What would you like to do?', choices)
+  PROMPT.select('What would you like to do?', choices)
 end
 
 def suspect_menu
   choices = Game.suspect_list
-  return PROMPT.select('It was...', choices)
+  PROMPT.select('It was...', choices)
 end
 
 def room_menu
   choices = Game.room_list
-  return PROMPT.select('...in the...', choices)
+  PROMPT.select('...in the...', choices)
 end
 
 def weapon_menu
   choices = Game.weapon_list
-  return PROMPT.select('...with the...!', choices)
+  PROMPT.select('...with the...!', choices)
 end
 
 def game_loop(game_object)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require_relative 'class_player'
 require_relative 'methods'
@@ -52,10 +54,10 @@ def load_game
       end
     end
     Player.load_cpu_players(cpu_players)
-    puts "Successfully loaded game."
+    puts 'Successfully loaded game.'
     game_object.user.show_player_info
     return game_object
-  rescue => e
+  rescue StandardError => e
     puts "Error: failed to load game. Make sure #{FILE_PATH} is in the game directory."
     process_main_menu
   end

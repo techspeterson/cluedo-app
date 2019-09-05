@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'colorize'
 
 class Game
@@ -6,21 +8,21 @@ class Game
   attr_accessor :checklist
   attr_reader :user
 
-  @@SUSPECT_LIST = ["Miss Scarlet", "Colonel Mustard", "Professor Plum", "Rev. Green", "Mrs. Peacock", "Mrs. White"].map do |suspect|
+  @@suspect_list = ['Miss Scarlet', 'Colonel Mustard', 'Professor Plum', 'Rev. Green', 'Mrs. Peacock', 'Mrs. White'].map do |suspect|
     suspect.colorize(:light_yellow)
   end
-  @@ROOM_LIST = ["Study", "Kitchen", "Ballroom", "Conservatory", "Billiard Room", "Library", "Hall", "Lounge", "Dining Room"].map do |room|
+  @@room_list = ['Study', 'Kitchen', 'Ballroom', 'Conservatory', 'Billiard Room', 'Library', 'Hall', 'Lounge', 'Dining Room'].map do |room|
     room.colorize(:light_blue)
   end
-  @@WEAPON_LIST = ["Candlestick", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"].map do |weapon|
+  @@weapon_list = ['Candlestick', 'Dagger', 'Lead Pipe', 'Revolver', 'Rope', 'Spanner'].map do |weapon|
     weapon.colorize(:light_red)
   end
 
   def initialize(user_object)
     @decks = {
-      suspect: Array.new(@@SUSPECT_LIST),
-      room: Array.new(@@ROOM_LIST),
-      weapon: Array.new(@@WEAPON_LIST)
+      suspect: Array.new(@@suspect_list),
+      room: Array.new(@@room_list),
+      weapon: Array.new(@@weapon_list)
     }
     @main_deck = []
     @envelope_cards = {
@@ -32,10 +34,10 @@ class Game
     @user = user_object
   end
 
-  def draw_card(deck=@main_deck)
+  def draw_card(deck = @main_deck)
     card = deck.sample
     deck.delete(card)
-    return card
+    card
   end
 
   def choose_envelope_cards
@@ -53,7 +55,7 @@ class Game
   end
 
   def checkbox(card)
-    return @checklist[card] ? ' [x]' : ' [ ]'
+    @checklist[card] ? ' [x]' : ' [ ]'
   end
 
   def format_table
@@ -75,7 +77,7 @@ class Game
       @table_rows << [suspect, room, weapon]
     end
 
-    @checklist_table =  TTY::Table.new header: ['Suspects', 'Rooms', 'Weapons'], rows: @table_rows
+    @checklist_table = TTY::Table.new header: %w[Suspects Rooms Weapons], rows: @table_rows
   end
 
   def init_checklist
@@ -104,18 +106,18 @@ class Game
   end
 
   def self.suspect_list
-    return @@SUSPECT_LIST
+    @@suspect_list
   end
 
   def self.room_list
-    return @@ROOM_LIST
+    @@room_list
   end
 
   def self.weapon_list
-    return @@WEAPON_LIST
+    @@weapon_list
   end
 
   def self.prompt
-    return @@prompt
+    @@prompt
   end
 end

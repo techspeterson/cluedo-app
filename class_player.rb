@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tty-table'
 require 'colorize'
 
@@ -10,11 +12,11 @@ class Player
   attr_accessor :checklist_formatted
   attr_accessor :is_user
 
-  @@character_list = ["Miss Scarlet".colorize(:red), "Colonel Mustard".colorize(:yellow), "Professor Plum".colorize(:magenta), "Rev. Green".colorize(:green), "Mrs. Peacock".colorize(:blue), "Mrs. White".colorize(:light_white)]
+  @@character_list = ['Miss Scarlet'.colorize(:red), 'Colonel Mustard'.colorize(:yellow), 'Professor Plum'.colorize(:magenta), 'Rev. Green'.colorize(:green), 'Mrs. Peacock'.colorize(:blue), 'Mrs. White'.colorize(:light_white)]
   @@all_players = []
   @@cpu_players = []
 
-  def initialize(is_user=false, player_selection=nil)
+  def initialize(is_user = false, player_selection = nil)
     if is_user
       @character = player_selection
       @@character_list.delete(player_selection)
@@ -39,7 +41,7 @@ class Player
   end
 
   def display_cards
-    puts "Your cards:"
+    puts 'Your cards:'
     @cards_in_hand.each do |card|
       puts card
     end
@@ -60,12 +62,10 @@ class Player
     found_cards = []
     search_terms.each do |search_term|
       @cards_in_hand.each do |card|
-        if card == search_term
-          found_cards << card
-        end
+        found_cards << card if card == search_term
       end
     end
-    return found_cards
+    found_cards
   end
 
   def self.load_cpu_players(players)
@@ -73,18 +73,18 @@ class Player
   end
 
   def self.cpu_players
-    return @@cpu_players
+    @@cpu_players
   end
 
   def self.all_players
-    return @@all_players
+    @@all_players
   end
 
   def self.character_list
-    return @@character_list
+    @@character_list
   end
 
   def to_s
-    return @character
+    @character
   end
 end

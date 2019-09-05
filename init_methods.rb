@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'class_game'
 require_relative 'class_player'
 require_relative 'methods'
@@ -20,7 +22,7 @@ def process_argv(argv)
 
   args_hash = DEFAULT_ARGS
 
-  if !argv.empty?
+  unless argv.empty?
     if argv.include?('-l')
       game_object = load_game
       game_loop(game_object)
@@ -32,7 +34,7 @@ def process_argv(argv)
       if arg_players >= 2 && arg_players <= 6
         args_hash[:number_of_cpu_players] = arg_players - 1
       else
-        puts "Warning: Invalid player number. Default value used."
+        puts 'Warning: Invalid player number. Default value used.'
       end
     end
 
@@ -47,7 +49,7 @@ def process_argv(argv)
     end
   end
 
-  return args_hash
+  args_hash
 end
 
 def init_from_args(arg_hash)
@@ -63,11 +65,11 @@ def init_from_args(arg_hash)
 
   until game_object.main_deck.empty?
     Player.all_players.each do |player|
-      player.add_card(game_object.draw_card) if !game_object.main_deck.empty?
+      player.add_card(game_object.draw_card) unless game_object.main_deck.empty?
     end
   end
   game_object.user.cards_in_hand.each do |card|
     game_object.update_checklist(card)
   end
-  return game_object
+  game_object
 end
