@@ -1,8 +1,6 @@
 require_relative 'class_game'
-require_relative 'class_player'
-require_relative 'methods'
 require_relative 'menu_methods'
-require_relative 'save_load_methods'
+require_relative 'init_methods'
 
 # App starts here
 if ARGV.empty?

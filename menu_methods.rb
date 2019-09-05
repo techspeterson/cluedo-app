@@ -4,6 +4,7 @@ require_relative 'class_game'
 require_relative 'class_player'
 require_relative 'methods'
 require_relative 'save_load_methods'
+require_relative 'init_methods'
 
 PROMPT = TTY::Prompt.new
 
@@ -52,7 +53,6 @@ def game_loop(game_object)
       make_guess(game_object)
     when 'accuse'
       make_accusation(game_object)
-      # restart_game
     when 'checklist'
       puts game_object.display_checklist
     when 'player'
@@ -69,11 +69,11 @@ def process_main_menu
   menu = main_menu
   case menu
   when 'new'
-    choices = Player.character_list
-    player_selection = PROMPT.select('Choose your player character:', choices)
-    choices = [2, 3, 4, 5, 6]
-    number_of_cpu_players = PROMPT.select('How many players? (Includes you and CPU players)', choices).to_i - 1
     arg_hash = DEFAULT_ARGS
+    choices = Player.character_list
+    arg_hash[:player_selection] = PROMPT.select('Choose your player character:', choices)
+    choices = [2, 3, 4, 5, 6]
+    arg_hash[:number_of_cpu_players] = PROMPT.select('How many players? (Includes you and CPU players)', choices).to_i - 1
     game_object = init_from_args(arg_hash)
     game_object.user.show_player_info
     game_loop(game_object)
