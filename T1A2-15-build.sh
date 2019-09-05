@@ -1,5 +1,3 @@
-ruby tests.rb
-
 mkdir dist
 cp ./app.rb ./dist
 cp ./class_game.rb ./dist

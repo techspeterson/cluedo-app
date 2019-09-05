@@ -18,5 +18,5 @@
 [x] User can view the cards in their hand (Tue)
 [x] User can view a checklist of viewed cards (Wed)
 [x] User can view a list of other players in the game (Wed)
-[ ] Game interface will use ASCII art to represent cards (Thu)
+[x] Cards, player names etc. should be colour coded to be easily distinguishable (Wed)
 [x] Game menu will allow easy selection of menu items, cards, etc (Wed)
