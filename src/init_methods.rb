@@ -52,7 +52,7 @@ def process_argv(argv)
   args_hash
 end
 
-def init_from_args(arg_hash)
+def create_game(arg_hash)
   user_object = Player.new(true, arg_hash[:player_selection])
   game_object = Game.new(user_object)
 

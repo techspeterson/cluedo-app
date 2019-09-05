@@ -26,4 +26,6 @@ The user is able to run the app while providing command line arguments, in order
 
 The user is able to save their game data to a predefined file path in the app directory, and load game data from that same file path if the file is available. The app will provide an error message and continue on as normal if the file does not exist, but currently does require that the file contains valid save data.
 
-## Control Flow Diagram
+## Control Flow Diagrams
+![create_game method](tessa-peterson-T1A2-5-create_game.png)
+![make_guess method](tessa-peterson-T1A2-5-make_guess.png)

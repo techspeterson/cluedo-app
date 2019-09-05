@@ -76,7 +76,7 @@ def process_main_menu
     arg_hash[:player_selection] = PROMPT.select('Choose your player character:', choices)
     choices = [6, 5, 4, 3, 2]
     arg_hash[:number_of_cpu_players] = PROMPT.select('How many players? (Includes you and CPU players)', choices).to_i - 1
-    game_object = init_from_args(arg_hash)
+    game_object = create_game(arg_hash)
     game_object.user.show_player_info
     game_loop(game_object)
   when 'load'

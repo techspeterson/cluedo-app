@@ -9,7 +9,7 @@ if ARGV.empty?
   process_main_menu
 else
   arg_hash = process_argv(ARGV)
-  game_object = init_from_args(arg_hash)
+  game_object = create_game(arg_hash)
   game_object.user.show_player_info
   game_loop(game_object)
 end

@@ -3,7 +3,7 @@ require_relative 'class_player'
 require_relative 'init_methods'
 
 def initialise_game_test
-  puts "Testing that init_from_args correctly creates the game object."
+  puts "Testing that create_game correctly creates the game object."
 
   arg_hash = {
     number_of_cpu_players: 5,
@@ -11,7 +11,7 @@ def initialise_game_test
   }
 
   expected = Player.character_list[0]  # Miss Scarlet (including colour formatting)
-  actual = init_from_args(arg_hash).user.character
+  actual = create_game(arg_hash).user.character
 
   if actual.nil?
     puts "Test failed: cannot find user object in game object"

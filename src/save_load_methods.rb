@@ -35,7 +35,7 @@ end
 
 def load_game
   arg_hash = DEFAULT_ARGS
-  game_object = init_from_args(arg_hash)
+  game_object = create_game(arg_hash)
   begin
     json = JSON.parse(File.read(FILE_PATH))
     game_object.envelope_cards = json['game']['envelope_cards']
