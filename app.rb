@@ -23,6 +23,7 @@ def game_loop(game_object)
   end
 end
 
+# App starts here
 if ARGV.empty?
   arg_hash = {
     number_of_cpu_players: 5,
