@@ -1,14 +1,20 @@
 require 'artii'
+require 'tty-prompt'
+require_relative 'class_game'
+require_relative 'class_player'
+require_relative 'methods'
+require_relative 'save_load_methods'
+
+PROMPT = TTY::Prompt.new
 
 def main_menu
   a = Artii::Base.new :font => 'slant'
-  # puts a.asciify('Cluedo')
   choices = [
     { name: 'New game', value: 'new' },
     { name: 'Load game', value: 'load' },
     { name: 'Exit', value: 'exit' }
   ]
-  return Game.prompt.select(a.asciify('Cluedo'), choices)
+  return PROMPT.select(a.asciify('Cluedo'), choices)
 end
 
 def game_menu
@@ -20,20 +26,61 @@ def game_menu
     { name: 'Save game', value: 'save' },
     { name: 'Exit', value: 'exit' }
   ]
-  return Game.prompt.select('What would you like to do?', choices)
+  return PROMPT.select('What would you like to do?', choices)
 end
 
 def suspect_menu
   choices = Game.suspect_list
-  return Game.prompt.select('It was...', choices)
+  return PROMPT.select('It was...', choices)
 end
 
 def room_menu
   choices = Game.room_list
-  return Game.prompt.select('...in the...', choices)
+  return PROMPT.select('...in the...', choices)
 end
 
 def weapon_menu
   choices = Game.weapon_list
-  return Game.prompt.select('...with the...!', choices)
+  return PROMPT.select('...with the...!', choices)
+end
+
+def game_loop(game_object)
+  loop do
+    menu = game_menu
+    case menu
+    when 'guess'
+      make_guess(game_object)
+    when 'accuse'
+      make_accusation(game_object)
+      # restart_game
+    when 'checklist'
+      puts game_object.display_checklist
+    when 'player'
+      game_object.user.show_player_info
+    when 'save'
+      save_game(game_object)
+    when 'exit'
+      exit
+    end
+  end
+end
+
+def process_main_menu
+  menu = main_menu
+  case menu
+  when 'new'
+    choices = Player.character_list
+    player_selection = PROMPT.select('Choose your player character:', choices)
+    choices = [2, 3, 4, 5, 6]
+    number_of_cpu_players = PROMPT.select('How many players? (Includes you and CPU players)', choices).to_i - 1
+    arg_hash = DEFAULT_ARGS
+    game_object = init_from_args(arg_hash)
+    game_object.user.show_player_info
+    game_loop(game_object)
+  when 'load'
+    game_object = load_game
+    game_loop(game_object)
+  when 'exit'
+    exit
+  end
 end

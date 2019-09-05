@@ -1,10 +1,11 @@
 require_relative 'class_game'
 require_relative 'class_player'
 require_relative 'menu_methods'
-require 'tty-prompt'
-require 'json'
 
-FILE_PATH = 'save-data.json'
+DEFAULT_ARGS = {
+  number_of_cpu_players: 5,
+  player_selection: Player.character_list[0]
+}
 
 def process_argv(argv)
   player_hash = {
@@ -15,15 +16,15 @@ def process_argv(argv)
     'peacock' => Player.character_list[4],
     'white' => Player.character_list[5]
   }
-  number_of_cpu_players = 5
-  player_selection = player_hash['scarlet']
+
+  args_hash = DEFAULT_ARGS
 
   if !argv.empty?
     if argv.include?('-p')
       index = argv.index('-p')
       arg_players = argv[index + 1].to_i
-      if arg_players > 0 && arg_players <= 6
-        number_of_cpu_players = arg_players - 1
+      if arg_players >= 2 && arg_players <= 6
+        args_hash[:number_of_cpu_players] = arg_players - 1
       else
         puts "Warning: Invalid player number. Default value used."
       end
@@ -33,17 +34,14 @@ def process_argv(argv)
       index = argv.index('-c')
       arg_character = argv[index + 1]
       if player_hash.include?(arg_character)
-        player_selection = player_hash[arg_character]
+        args_hash[:player_selection] = player_hash[arg_character]
       else
         puts 'Warning: Invalid character selection. Default character used.'
       end
     end
   end
 
-  return {
-    number_of_cpu_players: number_of_cpu_players,
-    player_selection: player_selection
-  }
+  return args_hash
 end
 
 def new_game(arg_hash, user_object)
@@ -122,56 +120,5 @@ def make_accusation(game_object)
   else
     puts 'You lose...'
   end
-  exit
-end
-
-def save_game(game_object)
-  game = {
-    envelope_cards: game_object.envelope_cards,
-    checklist: game_object.checklist
-  }
-  players = []
-  Player.all_players.each do |player|
-    players << {
-      is_user: player.is_user,
-      character: player.character,
-      cards_in_hand: player.cards_in_hand
-    }
-  end
-
-  data = {
-    game: game,
-    players: players
-  }
-
-  File.open(FILE_PATH, 'w') do |file|
-    file.write(JSON.generate(data))
-  end
-
-  puts "Game saved to #{FILE_PATH}"
-end
-
-def load_game(game_object)
-  begin
-    json = JSON.parse(File.read(FILE_PATH))
-    game_object.envelope_cards = json['game']['envelope_cards']
-    game_object.checklist = json['game']['checklist']
-    game_object.format_table
-    cpu_players = []
-    json['players'].each do |player|
-      if player['is_user']
-        game_object.user.character = player['character']
-        game_object.user.cards_in_hand = player['cards_in_hand']
-      else
-        load_player = Player.new
-        load_player.character = player['character']
-        load_player.cards_in_hand = player['cards_in_hand']
-        cpu_players << load_player
-      end
-    end
-    Player.load_cpu_players(cpu_players)
-    puts "Successfully loaded game."
-  rescue => e
-    puts "Error: failed to load game. Make sure #{FILE_PATH} is in the game directory"
-  end
+  return
 end

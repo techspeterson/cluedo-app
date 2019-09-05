@@ -1,4 +1,3 @@
-require 'tty-prompt'
 require 'colorize'
 
 class Game
@@ -30,7 +29,6 @@ class Game
       weapon: nil
     }
     init_checklist
-    @@prompt = prompt = TTY::Prompt.new
     @user = user_object
   end
 
