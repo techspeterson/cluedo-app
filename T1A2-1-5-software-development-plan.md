@@ -20,5 +20,10 @@ When the user feels they have sufficient information to deduce the murder, they 
 - **Making Guesses:** The user progresses through the game by guessing the contents of the envelope - the suspect, room and weapon involved in the murder. The user selects an item from each of the categories to make their guess, and each item is checked against the hands of the CPU players. If the CPU characters have any of the chosen cards in their hands, they will each show one of these cards to the player. Information on all the cards the user has seen is stored in a viewable checklist. The user can make their final accusation at any time, which will determine if they win or lose the game.
 
 ## User Interaction
+The user interacts with the app primarily through ingame menus. These ingame menus allow the user to scroll through the available options in the terminal, requiring no text input on the user's part and largely eliminating the need for menu error handling. These scrolling menus are used throughout the game and also provide the benefit of displaying all available options for a menu on-screen for the user automatically.
+
+The user is able to run the app while providing command line arguments, in order to define the player character and/or the number of players. These selections are formatted with the flag followed by the argument, for example `-c plum -p 5` will define the player `character` as Professor Plum and the total `player count` as 5. The app checks if the argument following each flag is valid; if an argument is invalid, a warning message is printed and a default value is used.
+
+The user is able to save their game data to a predefined file path in the app directory, and load game data from that same file path if the file is available. The app will provide an error message and continue on as normal if the file does not exist, but currently does require that the file contains valid save data.
 
 ## Control Flow Diagram
