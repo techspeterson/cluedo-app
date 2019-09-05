@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'class_game'
 require_relative 'menu_methods'
 require_relative 'init_methods'
