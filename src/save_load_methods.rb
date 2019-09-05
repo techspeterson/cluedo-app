@@ -34,10 +34,10 @@ def save_game(game_object)
 end
 
 def load_game
-  arg_hash = DEFAULT_ARGS
-  game_object = create_game(arg_hash)
   begin
     json = JSON.parse(File.read(FILE_PATH))
+    arg_hash = DEFAULT_ARGS
+    game_object = create_game(arg_hash)
     game_object.envelope_cards = json['game']['envelope_cards']
     game_object.checklist = json['game']['checklist']
     game_object.format_table
