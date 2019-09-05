@@ -1,6 +1,7 @@
 require_relative 'class_game'
 require_relative 'class_player'
 require_relative 'methods'
+require_relative 'save_load_methods'
 
 DEFAULT_ARGS = {
   number_of_cpu_players: 5,
@@ -20,6 +21,11 @@ def process_argv(argv)
   args_hash = DEFAULT_ARGS
 
   if !argv.empty?
+    if argv.include?('-l')
+      game_object = load_game
+      game_loop(game_object)
+    end
+
     if argv.include?('-p')
       index = argv.index('-p')
       arg_players = argv[index + 1].to_i
