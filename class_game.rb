@@ -52,26 +52,6 @@ class Game
     @main_deck.shuffle!
   end
 
-  def envelope_cards_values
-    return @envelope_cards.values
-  end
-
-  def self.suspect_list
-    return @@SUSPECT_LIST
-  end
-
-  def self.room_list
-    return @@ROOM_LIST
-  end
-
-  def self.weapon_list
-    return @@WEAPON_LIST
-  end
-
-  def self.prompt
-    return @@prompt
-  end
-
   def checkbox(card)
     return @checklist[card] ? ' [x]' : ' [ ]'
   end
@@ -121,5 +101,21 @@ class Game
   def update_checklist(card)
     @checklist[card] = true
     format_table
+  end
+
+  def self.suspect_list
+    return @@SUSPECT_LIST
+  end
+
+  def self.room_list
+    return @@ROOM_LIST
+  end
+
+  def self.weapon_list
+    return @@WEAPON_LIST
+  end
+
+  def self.prompt
+    return @@prompt
   end
 end

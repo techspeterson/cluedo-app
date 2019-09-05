@@ -68,6 +68,10 @@ class Player
     return found_cards
   end
 
+  def self.load_cpu_players(players)
+    @@cpu_players = players
+  end
+
   def self.cpu_players
     return @@cpu_players
   end
@@ -82,9 +86,5 @@ class Player
 
   def to_s
     return @character
-  end
-
-  def self.load_cpu_players(players)
-    @@cpu_players = players
   end
 end

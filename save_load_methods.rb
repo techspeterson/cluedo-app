@@ -53,6 +53,7 @@ def load_game
     end
     Player.load_cpu_players(cpu_players)
     puts "Successfully loaded game."
+    game_object.user.show_player_info
     return game_object
   rescue => e
     puts "Error: failed to load game. Make sure #{FILE_PATH} is in the game directory."

@@ -38,7 +38,7 @@ end
 
 def make_accusation(game_object)
   guesses = guess_all_categories
-  envelope_cards = game_object.envelope_cards_values
+  envelope_cards = game_object.envelope_cards.values
 
   puts "\"#{state_guess(guesses)}\""
   begin
