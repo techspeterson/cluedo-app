@@ -29,12 +29,15 @@ The user is able to save their game data to a predefined file path in the app di
 ## Known issues
 - App does not currently check if data loaded in from an external file is valid save data
 - Checklist table does not display properly if terminal window is too small
+- Save file stores game data unencrypted, so the user could read the win conditions from the file
 
 ## Control Flow Diagram
-Since most of the game takes place inside a menu loop with many options, rather than create a flowchart of the entire app's functionality I have provided flowcarts for two major parts of the app's functionality:
+Since most of the game takes place inside the game menu loop, rather than create a flowchart of the entire app's functionality I have provided flowcarts for these parts of the app's functionality:
 
-- the `create_game` method that runs when a new game is started
+- the `main_menu` method through which the user chooses to start a new game or load a save file
+- the `create_game` method that runs when the user selects to start a game
 - the `make_guess` method that runs when the user is making a guess
 
+![main_menu method](tessa-peterson-T1A2-5-main_menu.png)
 ![create_game method](tessa-peterson-T1A2-5-create_game.png)
 ![make_guess method](tessa-peterson-T1A2-5-make_guess.png)
