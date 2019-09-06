@@ -1,11 +1,16 @@
 # Cluedo App - Help File
 An app that lets you play Cluedo in your terminal.
-## Requirements
-- Ruby (works best in 2.5.5)
-- A bash terminal
 
 ## Installing
-1. Run the `build.sh` script in the command line:
+1. Install Ruby (works best in 2.5.5)
+
+2. Clone this repository
+
+```
+git clone git@github.com:techspeterson/cluedo-app.git
+```
+
+3. Run the `build.sh` script in the command line:
 ```
 bash build.sh
 ```
@@ -13,10 +18,11 @@ App files will be copied into `./dist` and all required gems will be automatical
 
 Gems used: `artii`, `colorize`, `tty-prompt`, `tty-table`
 
-2. Navigate into `./dist` and run the main app file:
+4. Navigate into `./dist` and run the main app file:
 ```
 ruby app.rb
 ```
+
 ## Optional flags
 Load game data:
 ```
