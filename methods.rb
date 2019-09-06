@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'colorize'
 require_relative 'class_game'
 require_relative 'class_player'
 require_relative 'menu_methods'
@@ -41,7 +42,7 @@ def make_accusation(game_object)
 
   puts "\"#{state_guess(guesses)}\""
   begin
-    confirm = PROMPT.yes?('Are you sure you want to make this accusation?')
+    confirm = PROMPT.yes?('Are you sure you want to make this accusation?'.underline)
   rescue StandardError => e
     confirm = false
   end
@@ -49,13 +50,16 @@ def make_accusation(game_object)
 
   puts ''
   puts 'The correct answer is...'
-  puts state_guess(envelope_cards)
+  puts state_guess(envelope_cards).underline
+  puts ''
 
   if guesses == envelope_cards
-    puts 'You win!'
+    puts 'You win!'.colorize(:white).on_red
   else
-    puts 'You lose...'
+    puts 'You lose...'.colorize(:white).on_blue
   end
+  puts ''
+
   choices = [
     { name: 'Return', value: 'menu' },
     { name: 'Exit', value: 'exit' }

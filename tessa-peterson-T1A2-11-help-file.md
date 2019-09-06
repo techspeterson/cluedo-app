@@ -10,6 +10,7 @@ An app that lets you play Cluedo in your terminal.
 bash build.sh
 ```
 App files will be copied into `./dist` and all required gems will be automatically installed.
+
 Gems used: `artii`, `colorize`, `tty-prompt`, `tty-table`
 
 2. Navigate into `./dist` and run the main app file:
